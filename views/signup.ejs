@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="userstyles.css">
+    </head>
+<body>
+    <div class="wrapper">
+      <div class="title">
+         Sign Up
+      </div>
+      <form action="/signsubmit" method="POST">
+         <div class="field">
+          <input type="text"  name="name" required placeholder="Enter Name here">
+            <label>Name</label>
+         </div>
+         <div class="field">
+          <input type="password"  name="password" required placeholder="Enter password here">
+            <label>Password</label>
+         </div>
+         <div class="field">
+          <input type="email"  name="email"  class="email1" placeholder="Enter Email here">
+            <label>Email</label>
+         </div>
+         <div class="field">
+          <input type="text"  name="address"  class="Address" placeholder="Enter City/Town name">
+            <label>City</label>
+         </div>
+         <div class="field">
+          <input type="text"  name="pincode"  class="pincode" placeholder="Enter PinCode">
+            <label>PinCode</label>
+         </div>
+         <div class="field">
+            <input type="submit" value="SignUp">
+         </div>
+     </div>
+      </form>
+   </div>
+</body>
+</html>

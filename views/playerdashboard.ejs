@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        img{
+            margin-bottom: 10px;
+        }
+        a{
+          position: relative;
+          float: right;
+          text-decoration: none;
+          font-size:x-large;
+          background-color: aqua;
+          color: black;
+          border-radius:10px;
+        }
+        h5{
+          position: relative;
+          top:10px;
+          font-size: xx-large;
+          margin-left:10px;
+          color:greenyellow;
+          font-family:"Lucida Console", "Courier New", monospace;
+        }
+        #sdate{
+          margin-left:40px;
+          margin-top:5px;
+          width:50%;
+        }
+        .idate{
+          width:50%;
+          margin:5px;
+        }
+        body {
+    background: #ecececdb;
+    background-image:url("back1.jpeg");
+    background-size: cover;
+}
+      </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <h5>Sports Schedular</h5>
+        <a  href="/getsessions">Join Sessions</a>
+        <a href="/logout">Logout</a>
+    </nav>
+    <div class="card-list">
+        <% if(locals.names){%>
+            <% for(var i=0;i<names.length;i++) {%>
+                <a href="#" class="card-item">
+                    <img src=<%=names[i].img%> alt="Card Image">
+                    <span class="developer"><%=names[i].name%></span>
+                    <h3>Sport Name:<%=names[i].name%></h3>
+                    <h3>Sport Venue:<%=names[i].venue%></h3>
+                    <h3>Starting Date:<%=names[i].start%></h3>
+                    <br>
+                  <form action="/joinsession" method="post" class="iforms">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal<%=i%>">
+                        Join
+                      </button>
+                      <div class="modal fade" id="exampleModal<%=i%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="exampleModalLabel">Register Now!</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="<%=names[i].img%>" alt="Card Image">
+                                <input  type="hidden" name="img" value="<%=names[i].img%>"><br>
+                                   Enter Full Name:<input  class="idate" type="text" name="fname"><br>
+                                    Name of the sport:<input class="idate" type="text"  value="<%=names[i].name%>" name="name"><br>
+                                    Name of the venue:<input class="idate" type="text"  name="venue" value="<%=names[i].venue%>"><br>
+                                    Game will start:<input id="sdate" type="text"  name="start" value="<%=names[i].start%>"><br>
+                                    <input type="submit" class="btn btn-primary" value="Submit"><br>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                   </form>
+                </a>
+       <%}%>
+          <%}%>
+       
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

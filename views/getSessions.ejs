@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="card-list">
+        <% if(locals.names){%>
+            <% for(var i=0;i<names.length;i++) {%>
+                <a href="#" class="card-item">
+                    <img src=<%=names[i].img%> alt="Card Image">
+                    <span class="developer"><%=names[i].name%></span>
+                    <h3>Name of the Player:<%=names[i].pname%></h3>
+                    <h3>Name of the game:<%=names[i].name%></h3>
+                    <h3>Location:<%=names[i].venue%></h3>
+                    <h3>Starting Date:<%=names[i].start%></h3>
+                    <br>
+                </a>
+       <% }%>
+          <%}%>
+       
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>
