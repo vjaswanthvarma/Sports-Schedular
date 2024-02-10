@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>Login Form Design | CodeLab</title>
+      <link rel="stylesheet" href="userstyles.css">
+      <style>
+      </style>
+   </head>
+   <body>
+      <div class="wrapper">
+         <div class="title">
+            Admin Login Form
+         </div>
+         <form action="/adminsubmits" method="POST">
+            <div class="field">
+               <input type="text" name="username" required>
+               <label>UserName</label>
+            </div>
+            <div class="field">
+               <input type="password"  name="password" placeholder="password">
+               <label>Password</label>
+            </div>
+            <div class="field">
+               <div class="field">
+                  <select name="role" placeholder="Role">
+                   <option value="student">Student</option>
+                   <option value="faculty">Faculty</option>
+                  </select>
+                </div>
+               <input type="submit" value="Login">
+            </div>
+            <div class="signup-link">
+               Not have any account? <a href="/signup">Signup now</a>
+            </div>
+        </div>
+         </form>
+      </div>
+   </body>
+</html>
