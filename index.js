@@ -7,7 +7,7 @@ const app=express();
 var md5 = require('md5');
 const session=require("express-session");
 const passport=require("passport");
-const Swal = require('sweetalert');
+const Swal = require('sweetalert2')
 const {Client}=require("pg");
 const Strategy=require("passport-local");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -43,23 +43,40 @@ app.get("/admin",async(req,res)=>{
         names:items,
     });
 })
+app.get("/adminlogin",(req,res)=>{
+    res.render("adminlogin.ejs");
+})
+app.post("/adminsubmits",async(req,res)=>{
+    console.log(req.body.name);
+    const print= await db.query("Select * from users where name=$1 and password=$2 and role=$3",[req.body.username,md5(req.body.password),req.body.role]);
+    if(print.rows.length>0){
+        res.redirect("/admin")
+    }
+    else{
+        res.render("adminlogin.ejs");
+    }
+})
 app.get("/login",(req,res)=>{
     if(req.isAuthenticated()){
         res.redirect("/player")
     }
     else{
-        res.render("userlogin.ejs");
+       res.render("userlogin.ejs");
     }
 })
 app.post("/loginsubmits",passport.authenticate("local",{
     successRedirect:"/login",
-    failureRedirect:"/",
+    failureRedirect:"/login",
 }));
 
 app.post("/signsubmit",async(req,res)=>{
     users=req.body.name;
-    await db.query("Insert Into users(name,password,email,address,pincode) Values($1,$2,$3,$4,$5)",[req.body.name,md5(req.body.password),req.body.email,req.body.address,req.body.pincode])
-    res.redirect("/player");
+    await db.query("Insert Into users(name,password,email,address,pincode,role) Values($1,$2,$3,$4,$5,$6)",[req.body.name,md5(req.body.password),req.body.email,req.body.address,req.body.pincode,req.body.role])
+    if(req.body.role=='student'){
+    res.redirect("/player");}
+    else{
+        res.redirect("/admin");
+    }
 })
 app.get("/signup",(req,res)=>{
     res.render("signup.ejs");
@@ -124,8 +141,7 @@ passport.use(new Strategy(async function verify(username,password,cb){
        }
     }
     else{
-          res.render("userlogin.ejs");
-    }
+        return cb(null,false);}
 }))
 passport.serializeUser((user,cb)=>{
     cb(null,user);
